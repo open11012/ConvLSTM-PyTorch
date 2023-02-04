@@ -10,7 +10,7 @@
 '''
 
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
 from encoder import Encoder
 from decoder import Decoder
 from model import ED
@@ -50,7 +50,7 @@ parser.add_argument('-frames_output',
                     default=10,
                     type=int,
                     help='sum of predict frames')
-parser.add_argument('-epochs', default=500, type=int, help='sum of epochs')
+parser.add_argument('-epochs', default=100, type=int, help='sum of epochs')
 args = parser.parse_args()
 
 random_seed = 1996
@@ -65,16 +65,16 @@ torch.backends.cudnn.benchmark = False
 
 save_dir = './save_model/' + TIMESTAMP
 
-trainFolder = MovingMNIST(is_train=True,
-                          root='data/',
+trainFolder = MovingMNIST(is_train=False,
+                          root='/ai/open11012/zhou/datasets/mnist/MovingMNIST/raw/',
                           n_frames_input=args.frames_input,
                           n_frames_output=args.frames_output,
-                          num_objects=[3])
+                          num_objects=[2])
 validFolder = MovingMNIST(is_train=False,
-                          root='data/',
+                          root='/ai/open11012/zhou/datasets/mnist/MovingMNIST/raw/',
                           n_frames_input=args.frames_input,
                           n_frames_output=args.frames_output,
-                          num_objects=[3])
+                          num_objects=[2])
 trainLoader = torch.utils.data.DataLoader(trainFolder,
                                           batch_size=args.batch_size,
                                           shuffle=False)

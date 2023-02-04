@@ -110,6 +110,7 @@ class MovingMNIST(data.Dataset):
                 data[i, top:bottom, left:right] = np.maximum(data[i, top:bottom, left:right], digit_image)
 
         data = data[..., np.newaxis]
+        np.savez("/ai/open11012/zhou/code/ConvLSTM-PyTorch/data/moving-mnist-train", data)
         return data
 
     def __getitem__(self, idx):
@@ -119,6 +120,7 @@ class MovingMNIST(data.Dataset):
             num_digits = random.choice(self.num_objects)
             # Generate data on the fly
             images = self.generate_moving_mnist(num_digits)
+            np.savez("/ai/open11012/zhou/code/ConvLSTM-PyTorch/data/moving-mnist-train", images)
         else:
             images = self.dataset[:, idx, ...]
 
