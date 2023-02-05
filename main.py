@@ -8,7 +8,7 @@
 @Version :   1.0
 @Description:   
 '''
-
+# %%
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
 from encoder import Encoder
@@ -26,7 +26,7 @@ from tqdm import tqdm
 import numpy as np
 from tensorboardX import SummaryWriter
 import argparse
-
+# %%
 TIMESTAMP = "2020-03-09T00-00-00"
 parser = argparse.ArgumentParser()
 parser.add_argument('-clstm',
@@ -91,7 +91,7 @@ if args.convgru:
 else:
     encoder_params = convgru_encoder_params
     decoder_params = convgru_decoder_params
-
+# %%
 
 def train():
     '''
